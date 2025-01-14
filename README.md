@@ -14,7 +14,7 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 - [x] A concise and compelling elevator pitch
 - [x] Description of key features
 - [x] Description of how you will use each technology
-- [x] One or more rough sketches of your application. Images must be embedded in this file using Markdown image references.
+- [ ] One or more rough sketches of your application. Images must be embedded in this file using Markdown image references.
 
 ### Elevator pitch
 
@@ -22,7 +22,20 @@ Have you ever felt that the chairs in your life need help finding love.  Look no
 
 ### Design
 
-[![Design image](placeholder.png)](https://ninjamock.com/s/QCKQ2Lx)
+![Home Page](https://github.com/user-attachments/assets/97ac9974-758b-4de7-b6d4-f616da844c9b)
+
+![Choose a Chair](https://github.com/user-attachments/assets/3063fc6f-70eb-4aee-a383-4f1fa7b82d39)
+
+![Match Page](https://github.com/user-attachments/assets/759f06fd-3682-42b8-85e0-32adb6fee5ee)
+
+![Account Creation](https://github.com/user-attachments/assets/9be2b307-abba-4e50-b0f9-6f3592dc86e3)
+
+![Log in page](https://github.com/user-attachments/assets/b6500257-65f9-4e14-b197-c2f9a0c53d1f)
+
+
+
+![Potential Chat page](https://github.com/user-attachments/assets/31c42fc1-4206-4f6a-94fb-4c22ce5d8fc1)
+
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 
