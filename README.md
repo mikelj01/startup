@@ -1,8 +1,8 @@
-# Your startup name here
+# The Love Seat
 
 [My Notes](notes.md)
 
-A brief description of the application here. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+My web application aims to connect those chairs who feel they need a little help sparking love in their lives.  It is a Dating app for chairs.
 
 
 > [!NOTE]
@@ -26,11 +26,11 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 ### Elevator pitch
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+Have you ever felt that the chairs in your life need help finding love.  Look no further than The Loveseat.  Here, you can upload a picture of your chair or choose from countless existing profile pictures.  Then you will be matched with other chairs to start fanning the flames!
 
 ### Design
 
-![Design image](placeholder.png)
+[![Design image](placeholder.png)](https://ninjamock.com/s/QCKQ2Lx)
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 
@@ -43,20 +43,20 @@ sequenceDiagram
 
 ### Key features
 
-- Describe your key feature
-- Describe your key feature
-- Describe your key feature
+- Offer Suggestions for chairs to match with
+- Select a chair for your profile
+- Connect over social media
 
 ### Technologies
 
 I am going to use the required technologies in the following ways.
 
-- **HTML** - Description here
-- **CSS** - Description here
-- **React** - Description here
-- **Service** - Description here
-- **DB/Login** - Description here
-- **WebSocket** - Description here
+- **HTML** - At the very least, I will have a home page, a login  page, a chair choosing page and a matching page.
+- **CSS** - I want to animate popups to suggest matches for other chairs
+- **React** - React to logging in, choosing a chair and accepting or rejecting a match.  
+- **Service** - A Chat plugin
+- **DB/Login** - Store log-in information, chair choice, previous matches
+- **WebSocket** - chat data, chair matching.
 
 ## 🚀 AWS deliverable
 
