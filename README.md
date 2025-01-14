@@ -50,7 +50,7 @@ I am going to use the required technologies in the following ways.
 - **HTML** - At the very least, I will have a home page, a login  page, a chair choosing page and a matching page.
 - **CSS** - I want to animate popups to suggest matches for other chairs
 - **React** - React to logging in, choosing a chair and accepting or rejecting a match.  
-- **Service** - A Chat plugin
+- **Service** - A Chat plugin, log in functionality, Saving info on chairs, uploading pictures, saving account data
 - **DB/Login** - Store log-in information, chair choice, previous matches
 - **WebSocket** - chat data, chair matching.
 
