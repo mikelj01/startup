@@ -64,15 +64,15 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **HTML pages** - I did not complete this part of the deliverable.
-- [ ] **Proper HTML element usage** - I did not complete this part of the deliverable.
-- [ ] **Links** - I did not complete this part of the deliverable.
-- [ ] **Text** - I did not complete this part of the deliverable.
-- [ ] **3rd party API placeholder** - I did not complete this part of the deliverable.
-- [ ] **Images** - I did not complete this part of the deliverable.
-- [ ] **Login placeholder** - I did not complete this part of the deliverable.
-- [ ] **DB data placeholder** - I did not complete this part of the deliverable.
-- [ ] **WebSocket placeholder** - I did not complete this part of the deliverable.
+- [x] **HTML pages** - I did several pages
+- [x] **Proper HTML element usage** - I did all the body, header, footer, main tags and stuff
+- [x] **Links** -  I have links between pages
+- [x] **Text** - there is text
+- [x] **3rd party API placeholder** - I have a placeholder for a button that will generate a random excuse
+- [x] **Images** - I have images
+- [x] **Login placeholder** - I have a login page
+- [x] **DB data placeholder** - I have a history of matches and previous chairs
+- [x] **WebSocket placeholder** - I have a messaging system and swipe left/right.
 
 ## 🚀 CSS deliverable
 
