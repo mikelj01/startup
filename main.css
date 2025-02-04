@@ -1,3 +1,8 @@
+.pacifico-regular {
+    font-family: "Pacifico", serif;
+    font-weight: 400;
+    font-style: normal;
+  }
 body {
     /* display: flex;
     flex-direction: column;
@@ -11,14 +16,34 @@ body {
     background-repeat: no-repeat; 
     
   }
-
+  
   header{
     flex: 1 calc(100vh - 110px);
     display: flex;
     flex-direction: column;
     align-items: left;
-    justify-content: space-around;
-    background-color: rgb(119, 89, 148);
+    /* justify-content: space-around; */
+    background: linear-gradient(rgb(147, 67, 85),rgb(115, 61, 124))
+  }
+  nav{
+    float: left;
+    background-color: rgb(53, 56, 56);
+    flex: auto;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-evenly;
+  }
+  .navlink{
+    color: #000000;
+    font-family: sans-serif;
+    background-color: rgb(140, 89, 148);
+    border: 5px solid;
+    border-color: rgb(140, 89, 148);
+  }
+  .sitename {
+    font-family: "Pacifico", sans-serif;
+    text-decoration: wavy;
+    font-size: 5vmin;
   }
   main {
     flex: 1 calc(100vh - 110px);
@@ -27,4 +52,9 @@ body {
     align-items: center;
     justify-content: space-around;
   }
-  
+  p {
+    font-family: sans-serif;
+  }
+  footer {
+    background-color:  rgb(53, 56, 56);
+  }
