@@ -3,18 +3,18 @@
     font-weight: 400;
     font-style: normal;
   }
+  .black-han-sans-regular {
+    font-family: "Black Han Sans", serif;
+    font-weight: 400;
+    font-style: normal;
+  }
 body {
     /* display: flex;
     flex-direction: column;
     min-width: 375px;
     background-color: rgb(255, 209, 249); */
-    background: linear-gradient(rgba(255, 209, 249, 0.5), rgba(188, 235, 249, 0.5)), 
-    url('https://tinyurl.com/y93hm9dx'); 
-    background-size: cover; 
-    background-attachment: fixed; 
-    background-position: center; 
-    background-repeat: no-repeat; 
-    
+     
+    background-color: aliceblue;
   }
   
   header{
@@ -23,7 +23,7 @@ body {
     flex-direction: column;
     align-items: left;
     /* justify-content: space-around; */
-    background: linear-gradient(rgb(147, 67, 85),rgb(115, 61, 124))
+    background: linear-gradient(rgb(67, 147, 138),rgb(74, 61, 124))
   }
   nav{
     float: left;
@@ -33,12 +33,16 @@ body {
     flex-direction: column;
     justify-content: space-evenly;
   }
-  .navlink{
-    color: #000000;
-    font-family: sans-serif;
-    background-color: rgb(140, 89, 148);
+  nav p{
+    font-family: "Black Han Sans";
+    color: rgb(83, 186, 202);
+  }
+  nav a{
+    color: #222222;
+    font-family: "Black Han Sans";
+    background-color: rgb(74, 61, 124);
     border: 5px solid;
-    border-color: rgb(140, 89, 148);
+    border-color: rgb(74, 61, 124);
   }
   .sitename {
     font-family: "Pacifico", sans-serif;
@@ -51,10 +55,28 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: space-around;
+    background: linear-gradient(rgba(255, 209, 249, 0.5), rgba(188, 235, 249, 0.5)), 
+    url('https://tinyurl.com/y93hm9dx'); 
+    background-size: cover; 
+    background-attachment: fixed; 
+    background-position: center; 
+    background-repeat: no-repeat;
+  
   }
-  p {
+  main p {
     font-family: sans-serif;
   }
+
   footer {
     background-color:  rgb(53, 56, 56);
+    font-family: sans-serif;
+    
+  }
+  Footer a {
+    font:  sans-serif;
+    color: #ffffff;
+  }
+  footer p {
+    font:  sans-serif;
+    color: #ffffff;
   }
