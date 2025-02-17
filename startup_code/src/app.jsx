@@ -5,11 +5,12 @@ import { BrowserRouter, NavLink, Route, Routes } from 'react-router-dom';
 import { Login } from './login/login';
 import { ChooseaChair } from './ChooseaChair/ChooseaChair';
 import { Msging } from './Msging/Msging';
-import { Matching } from './Matching/Matching';
+import { Matching } from './Matching/matching';
 import { Home } from './Home/Home';
 
 export default function App() {
   return (
+    <BrowserRouter>
     <div className="body bg-dark text-light">
       <header className="container-fluid">
         <nav className="navbar fixed-top navbar-dark">
@@ -18,29 +19,29 @@ export default function App() {
           </div>
           <menu className="navbar-nav d-flex flex-row">
             <li className="nav-item">
-              <a className="nav-link" href="">
+              <NavLink className="nav-link" to="">
                 Home
-              </a>
+              </NavLink>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="ChooseaChair">
+              <NavLink className="nav-link" to="ChooseaChair">
               Choose a Chair
-              </a>
+              </NavLink>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="Matching">
+              <NavLink className="nav-link" to="Matching">
               Find Your Match
-              </a>
+              </NavLink>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="Msging">
+              <NavLink className="nav-link" to="Msging">
               Messaging
-              </a>
+              </NavLink>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="login">
+              <NavLink className="nav-link" to="login">
               Log In
-              </a>
+              </NavLink>
             </li>
           </menu>
         </nav>
@@ -48,27 +49,42 @@ export default function App() {
 
       <main>App components go here</main>
 
+
+
+      <Routes>
+      <Route path='/login' element={<Login />} exact />
+      <Route path='/' element={<Home />} exact />
+      <Route path='/ChooseaChair' element={<ChooseaChair />} />
+      <Route path='/Matching' element={<Matching />} />
+      <Route path='/Msging' element={<Msging />} />
+      <Route path='*' element={<NotFound />} />
+      </Routes>
+
       <footer className="bg-dark text-light text-left py-3">
         <div className="foot-content">
           <p>
           © 2025 The Love Seat. All Rights Reserved.
           </p>
             <li>
-              <a href="https://instagram.com" class="social">
+              <NavLink to="https://instagram.com" ClassName="social">
                 Instagram
-              </a>
+              </NavLink>
             </li>
             <li>
-              <a href="https://x.com" class="social">
+              <NavLink to="https://x.com" ClassName="social">
               X
-              </a>
+              </NavLink>
             </li>
             <li>
-              <a href="https://facebook.com" class="social">
+              <NavLink to="https://facebook.com" ClassName="social">
               Facebook
-              </a>
+              </NavLink>
             </li>
-            <li><a href="https://github.com/mikelj01/startup" class="social">GitHub</a></li>
+            <li>
+              <NavLink className="soc-link" to="https://github.com/mikelj01/startup" >
+                GitHub  
+              </NavLink>
+            </li>
             <p>Acknowledgments:</p>
             <p>
               This page would not be possible without an entire bag of Tai Pei pork potstickers.  
@@ -78,5 +94,6 @@ export default function App() {
           </div>
         </footer>
     </div>
+    </BrowserRouter>
   );
 }
