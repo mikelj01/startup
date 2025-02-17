@@ -11,8 +11,10 @@ import { Home } from './Home/Home';
 export default function App() {
   return (
     <BrowserRouter>
-    <div className="body bg-dark text-light">
-      <header className="container-fluid">
+    <div>
+      
+      <header>
+      {/* <header className="container-fluid"> */}
         <nav className="navbar fixed-top navbar-dark">
           <div className="title">
           <p  className="sitename">The Love Seat</p>
@@ -47,18 +49,16 @@ export default function App() {
         </nav>
       </header>
 
-      <main>App components go here</main>
-
-
-
-      <Routes>
-      <Route path='/login' element={<Login />} exact />
-      <Route path='/' element={<Home />} exact />
-      <Route path='/ChooseaChair' element={<ChooseaChair />} />
-      <Route path='/Matching' element={<Matching />} />
-      <Route path='/Msging' element={<Msging />} />
-      <Route path='*' element={<NotFound />} />
-      </Routes>
+      <main>
+        <Routes>
+        <Route path='/login' element={<Login />} exact />
+        <Route path='/' element={<Home />} exact />
+        <Route path='/ChooseaChair' element={<ChooseaChair />} />
+        <Route path='/Matching' element={<Matching />} />
+        <Route path='/Msging' element={<Msging />} />
+        <Route path='*' element={<NotFound />} />
+        </Routes>
+      </main>
 
       <footer className="bg-dark text-light text-left py-3">
         <div className="foot-content">
@@ -66,22 +66,22 @@ export default function App() {
           © 2025 The Love Seat. All Rights Reserved.
           </p>
             <li>
-              <NavLink to="https://instagram.com" ClassName="social">
+              <NavLink to="https://instagram.com" className="social">
                 Instagram
               </NavLink>
             </li>
             <li>
-              <NavLink to="https://x.com" ClassName="social">
+              <NavLink to="https://x.com" className="social">
               X
               </NavLink>
             </li>
             <li>
-              <NavLink to="https://facebook.com" ClassName="social">
+              <NavLink to="https://facebook.com" className="social">
               Facebook
               </NavLink>
             </li>
             <li>
-              <NavLink className="soc-link" to="https://github.com/mikelj01/startup" >
+              <NavLink className="social" to="https://github.com/mikelj01/startup" >
                 GitHub  
               </NavLink>
             </li>
@@ -96,4 +96,7 @@ export default function App() {
     </div>
     </BrowserRouter>
   );
+}
+function NotFound() {
+  return <main className="container-fluid bg-secondary text-center">404: Return to sender. Address unknown.</main>;
 }
