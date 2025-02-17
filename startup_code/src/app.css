@@ -19,7 +19,10 @@
     background-color: aliceblue;
     color-scheme: light dark;
   }
-  
+  .foot-content {
+    padding-left: 20px; 
+    text-align: left;
+  }
   header{
     flex: 1 calc(100vh - 110px);
     display: flex;
@@ -57,6 +60,9 @@
     background-color: rgb(74, 61, 124);
     border: 5px solid;
     border-color: rgb(74, 61, 124);
+  }
+  .navbar-nav {
+    gap: 15px; 
   }
   .sitename {
     font-family: "Pacifico", sans-serif;
