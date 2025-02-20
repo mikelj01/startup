@@ -30,11 +30,11 @@ export default function App() {
               Choose a Chair
               </NavLink>
             </li>
-            <li className="nav-item">
+            {/* <li className="nav-item">
               <NavLink className="nav-link" to="Matching">
               Find Your Match
               </NavLink>
-            </li>
+            </li> */}
             <li className="nav-item">
               <NavLink className="nav-link" to="Msging">
               Messaging
