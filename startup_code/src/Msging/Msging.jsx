@@ -2,6 +2,18 @@ import React from 'react';
 import "./Msging.css";
 
 export function Msging() {
+const [excuse, setExcuse] = React.useState("");
+const excuses = ["I'm not feeling well", "I have a family emergency", "I have to work late", "I have a prior engagement", 
+  "I'm not feeling up to it", "I'm not in the mood", "I'm not feeling social", "you stink"];
+
+function getExcuse() {
+  let newExcuse;
+  do{
+  let randomIndex = Math.floor(Math.random() * excuses.length);
+  newExcuse = excuses[randomIndex];}
+  while (newExcuse === excuse);
+  setExcuse(newExcuse);
+}
   return (
     <main className="container-fluid bg-secondary text-center">
       {/* a plugin that prints out a response to whatever message you input 
@@ -12,14 +24,9 @@ export function Msging() {
                 <img src="https://tinyurl.com/3bsjw4au" width="500"></img>
 
 
-{/* a function that returns a random phrase from a list of phrases 
--user, presses the button and activates the function
-- the function goes into an array of quotes
-- it calls a random integer and uses that as the index for the quote
-- the function returns the quote at that index
-- the page renders what was most recently returned there.*/}
-                <p>an api that provides random suggestions for when you need an excuse to get out of a social engagement you're being invited to</p>
-                <button className="button">Excuses</button></div>
+{/* excuses */}
+                <p>{excuse}</p>
+                <button className="button" onClick={() => getExcuse()}>Excuses</button></div>
     </main>
   );
 }

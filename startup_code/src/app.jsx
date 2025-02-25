@@ -9,6 +9,7 @@ import { Matching } from './Matching/matching';
 import { Home } from './Home/Home';
 
 export default function App() {
+  const [user, setUser] = React.useState(localStorage.getItem("username") ||null);
   return (
     <BrowserRouter>
     <div>
@@ -25,21 +26,21 @@ export default function App() {
                 Home
               </NavLink>
             </li>
-            <li className="nav-item">
-              <NavLink className="nav-link" to="ChooseaChair">
+            {user && <li className="nav-item">
+               < NavLink className="nav-link" to="ChooseaChair">
               Choose a Chair
               </NavLink>
-            </li>
+            </li>}
             {/* <li className="nav-item">
               <NavLink className="nav-link" to="Matching">
               Find Your Match
               </NavLink>
             </li> */}
-            <li className="nav-item">
+            {user && <li className="nav-item">
               <NavLink className="nav-link" to="Msging">
               Messaging
               </NavLink>
-            </li>
+            </li>}
             <li className="nav-item">
               <NavLink className="nav-link" to="login">
               Log In
@@ -51,8 +52,8 @@ export default function App() {
 
       <main>
         <Routes>
-        <Route path='/login' element={<Login />} exact />
-        <Route path='/' element={<Home />} exact />
+        <Route path='/login' element={<Login setUsername={setUser}/>} exact />
+        {user ? (<Route path='/' element={<Home />} exact />) : (<Route path='/' element={<Login setUser={setUser}/>} exact />)}
         <Route path='/ChooseaChair' element={<ChooseaChair />} />
         <Route path='/Matching' element={<Matching />} />
         <Route path='/Msging' element={<Msging />} />

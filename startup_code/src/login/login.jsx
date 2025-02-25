@@ -1,7 +1,7 @@
 import React from 'react';
 import "./login.css"
 
-export function Login() {
+export function Login({setUser}) {
 const [username, setUsername] = React.useState("");
 const [password, setPassword] = React.useState("");
 
@@ -14,6 +14,8 @@ function passinput(event) {
 function logInUser() {
   localStorage.setItem("username", username);
   localStorage.setItem("password", password);
+  setUser(username);
+  window.location.href = "/";
 }
 
   return (
