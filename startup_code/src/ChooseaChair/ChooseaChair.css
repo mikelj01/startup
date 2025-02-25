@@ -46,6 +46,13 @@
     grid-auto-rows: 100px;
     grid-gap: 2em;
   }
+
+  .chairChoice:hover {
+    transform: scale(1.1);
+  }
+  .button:hover {
+    transform: scale(1.1);
+  }
   .chairchoice{
     border: #333 solid thick;
     border-radius: 1em;

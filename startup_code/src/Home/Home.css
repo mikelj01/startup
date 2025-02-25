@@ -199,7 +199,11 @@ td {
   .chairChoice:hover {
     transform: scale(1.1);
   }
-  
+  .button:hover {
+    transform: scale(1.1);
+  }
+
+
   @media (max-width: 768px) {
     .chairChoice {
       max-width: 150px;

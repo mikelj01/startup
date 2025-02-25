@@ -8,7 +8,22 @@ export function Home() {
   
   //   React.useEffect(() => {setProfile('placeholder.png')})
   const profilePic = localStorage.getItem('profilePic')|| 'https://images.pexels.com/photos/963486/pexels-photo-963486.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
+  const chairs = [
+    "75497317-color-chair.jpg", "Yes.jpg", "rEd.png", "kneetouch.jpg", "malelivingspace.jpg", "leftie'sNightmare.jpg", "notAMurderer.jpg", "dontSit.png", "slughorn.avif", 
+   "silhouet-zwart-stoel-clipart-16888496171rE.jpg", "wickerchair-graphicsfairy011c.jpg"
+  ]
+  let newMatchImg = chairs[Math.floor(Math.random() * chairs.length)]
+  const [match_array, setMatchArray] = React.useState([])
+  const [match, setMatch] = React.useState('')
+  function newMatch() {
+    newMatchImg = chairs[Math.floor(Math.random() * chairs.length)]
+  }
 
+  function Yeah(){
+    setMatchArray([...match_array, newMatchImg])
+    localStorage.setItem('match_array', JSON.stringify(match_array))
+    newMatch()
+  }
 
   return (
 
@@ -60,9 +75,9 @@ export function Home() {
             </thead>
             <tbody>
               <tr>
-              <td><button className='button'>Nope</button></td>
-                <td><img className="chairChoice" src="https://tinyurl.com/3dh28xt6" width="200" alt="Chair 1" /></td>
-                <td><button className='button'>Yep</button></td>
+              <td><button className='button'  style={{ cursor: 'pointer' }} onClick={()=>Yeah()}>Yeah</button></td>
+                <td><img className="chairChoice" src={newMatchImg} width="200" alt="Chair 1" /></td>
+                <td><button className='button' onClick={()=>newMatch()}>Nay</button></td>
                 {/* <td><img className="chairChoice" src="https://tinyurl.com/48ywaav3" width="200" alt="Chair 2" /></td> */}
                 {/* <td><img className="chairChoice" src="https://tinyurl.com/4emmm6wa" width="200" alt="Chair 3" /></td> */}
               </tr>
