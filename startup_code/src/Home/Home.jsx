@@ -12,17 +12,20 @@ export function Home() {
     "75497317-color-chair.jpg", "Yes.jpg", "rEd.png", "kneetouch.jpg", "malelivingspace.jpg", "leftie'sNightmare.jpg", "notAMurderer.jpg", "dontSit.png", "slughorn.avif", 
    "silhouet-zwart-stoel-clipart-16888496171rE.jpg", "wickerchair-graphicsfairy011c.jpg"
   ]
-  let newMatchImg = chairs[Math.floor(Math.random() * chairs.length)]
+  const [newMatchImg, setNewMatchImg] = React.useState(chairs[Math.floor(Math.random() * chairs.length)]);
   const [match_array, setMatchArray] = React.useState([])
   const [match, setMatch] = React.useState('')
   function newMatch() {
-    newMatchImg = chairs[Math.floor(Math.random() * chairs.length)]
+    setNewMatchImg(chairs[Math.floor(Math.random() * chairs.length)]);
   }
 
-  function Yeah(){
-    setMatchArray([...match_array, newMatchImg])
-    localStorage.setItem('match_array', JSON.stringify(match_array))
-    newMatch()
+  function Yeah() {
+    setMatchArray((prev) => {
+      const updatedArray = [...prev, newMatchImg];
+      localStorage.setItem('match_array', JSON.stringify(updatedArray));
+      return updatedArray;
+    });
+    newMatch();
   }
 
   return (
@@ -69,8 +72,7 @@ export function Home() {
           <p className="tableHead"><b>New Matches</b></p>
           <table className='mtchTable'>
             <thead>
-              <tr>
-                
+              <tr> 
               </tr>
             </thead>
             <tbody>
