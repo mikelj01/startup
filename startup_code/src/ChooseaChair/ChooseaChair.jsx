@@ -3,7 +3,7 @@ import "./ChooseaChair.css"
 // import profPicPicker from "../profPic.jsx"
 
 export function ChooseaChair() {
-  const[profilePic, setProfile] = React.useState(() => {return localStorage.getItem("profilePic") || "https://images.pexels.com/photos/963486/pexels-photo-963486.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"})
+  const[profilePic, setProfile] = React.useState(() => {return localStorage.getItem("profilePic") || 'DefaultChair.png'})
 localStorage.setItem("profilePic", profilePic)
   // React.useEffect(() => {setProfile(pic)})
 
@@ -42,6 +42,9 @@ localStorage.setItem("profilePic", profilePic)
           </button>
           <button onClick={()=>setProfile("dontSit.png")} style={{ border: 'none', background: 'none', padding: 0, cursor: 'pointer' }}>
             <img className="chairchoice" src="dontSit.png" alt="a chair" width="100"></img>
+          </button>
+          <button onClick={()=>setProfile('DefaultChair.png')} style={{ border: 'none', background: 'none', padding: 0, cursor: 'pointer' }}>
+            <img className="chairchoice" src='DefaultChair.png' alt="a chair" width="100"></img>
           </button>
       </div>
       {/* <p>Or</p>

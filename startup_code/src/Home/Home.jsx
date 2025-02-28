@@ -7,10 +7,10 @@ export function Home() {
   // const[profilePic, setProfile] = React.useState('https://images.pexels.com/photos/963486/pexels-photo-963486.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1')
   
   //   React.useEffect(() => {setProfile('placeholder.png')})
-  const profilePic = localStorage.getItem('profilePic')|| 'https://images.pexels.com/photos/963486/pexels-photo-963486.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
+  const profilePic = localStorage.getItem('profilePic')|| 'DefaultChair.png'
   const chairs = [
     "75497317-color-chair.jpg", "Yes.jpg", "rEd.png", "kneetouch.jpg", "malelivingspace.jpg", "leftie'sNightmare.jpg", "notAMurderer.jpg", "dontSit.png", "slughorn.avif", 
-   "silhouet-zwart-stoel-clipart-16888496171rE.jpg", "wickerchair-graphicsfairy011c.jpg"
+   "silhouet-zwart-stoel-clipart-16888496171rE.jpg", "wickerchair-graphicsfairy011c.jpg", 'DefaultChair.png', 'images (1).jpg', 'images (2).jpg', 'images (3).jpg', 'images (4).jpg', 'images (5).jpg', 'images (6).jpg', 'images (8).jpg'
   ]
   const [newMatchImg, setNewMatchImg] = React.useState(chairs[Math.floor(Math.random() * chairs.length)]);
   const [match_array, setMatchArray] = React.useState([])
@@ -31,44 +31,17 @@ export function Home() {
   return (
 
     <main className="container-fluid bg-secondary text-center">
-      {/* The picture needs to be an object that remains the same across all the pages on the site. It will have to pull from the server data. */}
-      {/* --- Pseudocode---\
-      from profile image, import profile pic
-       */}
       <div><p className="tableHead"> <span>Your Chair</span></p>
       <img src={profilePic} alt="Your Chair" width="100" class="Profile_img"></img>
         <p>
 
         </p>
-        {/* A button that takes you to a page to choose your profile chair
-        - Just a straight up hyperlink */}
-        
-          {/* <section>
-          
-            <Link to="/ChooseaChair">
-              <button className="button">Choose a Chair</button>
-            </Link>
-           
-            </section> */}
           
         <p></p>
 
           <div>
         <div className="chaircontainter">
-          {/* A series of buttons that you can either swipe left or right on to match with/refuse 
-          =Base level:
-          - *a user taps the left or right side of the image
-          -*when they tap the right, a thumbs up appears
-          - Data is sent to the server saying that they matched with this chair.
-          - *the image disappears and appears in their recent matches section
-          - *the server pulls up a new picture of another chair from the record of profiles. 
-          - *when the user taps the left side of the picture, we get a thumbs down.
-          - *the image disappears and the server calls up a new image. 
-          = Level up
-          - animation that follows the user's finger*/}
-          {/* ---Pseudocode---
-          In one file, I'll have match button function
-          In another, we have a seried of images (probably something in public) */}
+         
           <p className="tableHead"><b>New Matches</b></p>
           <table className='mtchTable'>
             <thead>
