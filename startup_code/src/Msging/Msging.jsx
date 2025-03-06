@@ -1,4 +1,6 @@
-import React from 'react';
+// import React, { use } from 'react';
+import React, { useState, useEffect, use } from 'react';
+
 import "./Msging.css";
 import { random } from 'nanoid';
 import { func } from 'prop-types';
@@ -60,8 +62,8 @@ function getExcuse() {
   setExcuse(newExcuse);
 }
 
-
-
+useEffect(() => {Response();}, []);
+useEffect(() => {getExcuse();}, []);
 
 
 // actual HTML from now on
@@ -89,5 +91,6 @@ function getExcuse() {
         <button className="button" onClick={() => getExcuse()}>Excuses</button>
       </div>
     </main>
+  
   );
 }
