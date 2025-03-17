@@ -62,7 +62,6 @@ function getExcuse() {
   setExcuse(newExcuse);
 }
 
-useEffect(() => {Response();}, []);
 useEffect(() => {getExcuse();}, []);
 
 

@@ -15,6 +15,7 @@ export function Home() {
   const [newMatchImg, setNewMatchImg] = React.useState(chairs[Math.floor(Math.random() * chairs.length)]);
   const [match_array, setMatchArray] = React.useState([])
   const [match, setMatch] = React.useState('')
+  
   function newMatch() {
     setNewMatchImg(chairs[Math.floor(Math.random() * chairs.length)]);
   }
