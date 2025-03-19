@@ -43,3 +43,22 @@ apiRouter.post('/auth/create', async (req, res) => {
     res.send({ email: user.email });
   }
 });
+
+async function createUser(email, password) {
+  const passwordHash = await bcrypt.hash(password, 10);
+
+  const user = {
+    email: email,
+    password: passwordHash,
+    token: uuid.v4(),
+  };
+  users.push(user);
+
+  return user;
+}
+
+async function findUser(field, value) {
+  if (!value) return null;
+
+  return users.find((u) => u[field] === value);
+}
