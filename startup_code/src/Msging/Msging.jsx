@@ -11,7 +11,7 @@ const [excuse, setExcuse] = React.useState("");
 const [messages, setMessages] = React.useState(() => {return localStorage.getItem([])||[]});
 const [index, setIndex] = React.useState(() => {return localStorage.getItem(0)||0});
 const [typed_msg, setTypedMsg] = React.useState("");
-const messageArray = ["Hi", "Good, How are you?", "Nice, I like your chair", "Want to go to the park?", "Sure", "I'll be there in 5 minutes", "I'm here", "I'm leaving", "Goodbye"];
+//const messageArray = ["Hi", "Good, How are you?", "Nice, I like your chair", "Want to go to the park?", "Sure", "I'll be there in 5 minutes", "I'm here", "I'm leaving", "Goodbye"];
 
 
 function textInpt(event) {
@@ -41,7 +41,7 @@ async function sendMessage() {
     localStorage.setItem('messages', JSON.stringify(message));
     setMessages(message);
     setTypedMsg("");
-    delayResponse();
+    //delayResponse();
   }
 }
 
@@ -67,15 +67,15 @@ async function sendMessage() {
 
 
 
-function Response() {
-  if (index < messageArray.length - 1) {
-    setIndex(index + 1);
-  }
-  else {
-    setIndex(0);
-  }
-  return messageArray[index];
-}
+// function Response() {
+//   if (index < messageArray.length - 1) {
+//     setIndex(index + 1);
+//   }
+//   else {
+//     setIndex(0);
+//   }
+//   return messageArray[index];
+// }
 
 
 class message {
