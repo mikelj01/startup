@@ -10,6 +10,7 @@ const authCookieName = 'token';
 const port = process.argv.length > 2 ? process.argv[2] : 4000;
 
 let users = [];
+let messages = [];
 
 app.use(express.json());
 
@@ -48,6 +49,17 @@ async function createUser(username, password) {
 
   return user;
 }
+
+
+apiRouter.post('/messages/add', async (req, res) => {
+  const user = users.find((u) => u.token === req.cookies[authCookieName]);
+  if (!user) {
+    res.status(401).send({ msg: 'user does not exist' });
+    return;
+  }
+  messages.push({ from: user.username, message: req.body.message });
+  res.send({ messages });
+});
 
 //add to the yeahs
 apiRouter.post('/yeahs/add', async (req, res) => {

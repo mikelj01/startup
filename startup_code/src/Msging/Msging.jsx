@@ -71,19 +71,10 @@ useEffect(() => {getExcuse();}, []);
   return (
     <main className="container-fluid bg-secondary text-center">
 
-{/* <div className="grid grid-cols-3 gap-4 p-4">
-      {match_array.map((image, index) => (
-        <img
-          key={index}
-          src={image}
-          alt={`Image ${index + 1}`}
-          className="cursor-pointer rounded-lg shadow-md hover:shadow-lg transition-transform transform hover:scale-105"
-          onClick={() => handleImageClick(image)}
-        />
-      ))}
-    </div> */}
-
-      {/* messages */}
+      <p>
+      
+      </p>
+      
       <div className = "Message_Screen">
         <p><b>Messages:</b></p> 
         {messages.map((msg, index) => (

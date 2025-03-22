@@ -20,8 +20,8 @@ export function Home() {
     setNewMatchImg(chairs[Math.floor(Math.random() * chairs.length)]);
   }
 
-  function Yeah() {
-    const response = fetch('/api/yeahs/add', {
+  async function Yeah() {
+    const response = await fetch('/api/yeahs/add', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ id: newMatchImg }),
@@ -34,7 +34,9 @@ export function Home() {
       localStorage.setItem('match_array', JSON.stringify(updatedArray));
       return updatedArray;
     });
+    window.location.href = '/Msging';
     newMatch();
+    
   }}
 
   return (
@@ -73,29 +75,6 @@ export function Home() {
        
         </div>
 
-
-          {/* <p>History</p>
-          <table>
-            <th>Previous Matches</th>
-            
-            <tr>
-              
-              <td>
-                <Link to='/Msging' className="imgbtn">
-                  <button>
-                    <img className="matchimg" src="https://tinyurl.com/4zmry9bt" width="100"></img>
-                  </button>
-                </Link>
-              </td>
-              <td>
-                <Link to='/Msging'>
-                <button>
-                  <img className="matchimg" src="https://tinyurl.com/48muuf6s" width="100"></img>
-                  </button>
-                </Link>
-              </td>
-            </tr>
-          </table></div> */}
     </div>
 
     </main>
@@ -103,24 +82,3 @@ export function Home() {
 }
 
 
-
- {/* <div>
-          <p className='pageText'>Find Friends</p>
-          <input type="text" name="search" placeholder="Search" className="search"></input>
-        </div>
-      
-        <div>
-          <p></p>
-          <p className='pageText'>Set Someone Else Up!</p>
-          </div>
-          <div className="container">
-            <img className="chairchoice" src="https://tinyurl.com/3ztb2uzb" alt="a chair" width="100"></img>
-            <img className="chairchoice" src="https://tinyurl.com/3ztb2uzb" alt="a chair" width="100"></img>
-            <img className="chairchoice" src="https://tinyurl.com/3ztb2uzb" alt="a chair" width="100"></img>
-            <img className="chairchoice" src="https://tinyurl.com/3ztb2uzb" alt="a chair" width="100"></img>
-            <img className="chairchoice" src="https://tinyurl.com/3ztb2uzb" alt="a chair" width="100"></img>
-            <img className="chairchoice" src="https://tinyurl.com/3ztb2uzb" alt="a chair" width="100"></img>
-            <img className="chairchoice" src="https://tinyurl.com/3ztb2uzb" alt="a chair" width="100"></img>
-            <img className="chairchoice" src="https://tinyurl.com/3ztb2uzb" alt="a chair" width="100"></img>
-            <img className="chairchoice" src="https://tinyurl.com/3ztb2uzb" alt="a chair" width="100"></img>
-          </div> */}
