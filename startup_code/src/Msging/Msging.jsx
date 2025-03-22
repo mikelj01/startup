@@ -53,13 +53,15 @@ class message {
 }
 
 
-function getExcuse() {
-  let newExcuse;
-  do{
-  let randomIndex = Math.floor(Math.random() * excuses.length);
-  newExcuse = excuses[randomIndex];}
-  while (newExcuse === excuse);
-  setExcuse(newExcuse);
+async function getExcuse() {
+  fetch('https://quote.cs260.click')
+      .then((response) => response.json())
+      .then((data) => {
+        setExcuse(data.quote);
+
+      })
+      .catch();
+  
 }
 
 useEffect(() => {getExcuse();}, []);
@@ -87,7 +89,7 @@ useEffect(() => {getExcuse();}, []);
 {/* excuses */}
       <div>
         <p>{excuse}</p>
-        <button className="button" onClick={() => getExcuse()}>Excuses</button>
+        <button className="button" onClick={() => getExcuse()}>Affirmations</button>
       </div>
     </main>
   

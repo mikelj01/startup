@@ -5,7 +5,24 @@ import "./ChooseaChair.css"
 export function ChooseaChair() {
   const[profilePic, setProfile] = React.useState(() => {return localStorage.getItem("profilePic") || 'DefaultChair.png'})
 localStorage.setItem("profilePic", profilePic)
-  // React.useEffect(() => {setProfile(pic)})
+
+
+async function setProfpic(newPic){
+  const response = await fetch('/api/profPic/set', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    credentials: 'include',
+    body: JSON.stringify({ pic: newPic }),
+  });
+  if (response.ok) {
+    const data = await response.json();
+    setProfile(data.pic);
+    localStorage.setItem("profilePic", data.pic);
+  }
+  else {
+    console.log('Error: ' + response.status);
+  }
+}
 
 
   return (
@@ -22,28 +39,28 @@ localStorage.setItem("profilePic", profilePic)
 - the function then sets a new global variable for the profile pic.  
 - This variable is called wherever your profile is displayed*/}
         <div className="container">
-          <button onClick={()=>setProfile('Yes.jpg')} style={{ border: 'none', background: 'none', padding: 0, cursor: 'pointer' }}>
+          <button onClick={()=>setProfpic('Yes.jpg')} style={{ border: 'none', background: 'none', padding: 0, cursor: 'pointer' }}>
             <img className="chairchoice" src="Yes.jpg" alt="a chair" width="100"></img>
           </button>
-          <button onClick={()=>setProfile("rEd.png")} style={{ border: 'none', background: 'none', padding: 0, cursor: 'pointer' }}>
+          <button onClick={()=>setProfpic("rEd.png")} style={{ border: 'none', background: 'none', padding: 0, cursor: 'pointer' }}>
             <img className="chairchoice" src="rEd.png" alt="a chair" width="100"></img>
           </button>
-          <button onClick={()=>setProfile('kneetouch.jpg')} style={{ border: 'none', background: 'none', padding: 0, cursor: 'pointer' }}>
+          <button onClick={()=>setProfpic('kneetouch.jpg')} style={{ border: 'none', background: 'none', padding: 0, cursor: 'pointer' }}>
             <img className="chairchoice" src="kneetouch.jpg" alt="a chair" width="100"></img>
           </button>
-          <button onClick={()=>setProfile("malelivingspace.jpg")} style={{ border: 'none', background: 'none', padding: 0, cursor: 'pointer' }}>
+          <button onClick={()=>setProfpic("malelivingspace.jpg")} style={{ border: 'none', background: 'none', padding: 0, cursor: 'pointer' }}>
             <img className="chairchoice" src="malelivingspace.jpg" alt="a chair" width="100"></img>
           </button>
-          <button onClick={()=>setProfile("leftie'sNightmare.jpg")} style={{ border: 'none', background: 'none', padding: 0, cursor: 'pointer' }}>
+          <button onClick={()=>setProfpic("leftie'sNightmare.jpg")} style={{ border: 'none', background: 'none', padding: 0, cursor: 'pointer' }}>
             <img className="chairchoice" src="leftie'sNightmare.jpg" alt="a chair" width="100"></img>
           </button>
-          <button onClick={()=>setProfile("notAMurderer.jpg")} style={{ border: 'none', background: 'none', padding: 0, cursor: 'pointer' }}>
+          <button onClick={()=>setProfpic("notAMurderer.jpg")} style={{ border: 'none', background: 'none', padding: 0, cursor: 'pointer' }}>
             <img className="chairchoice" src="notAMurderer.jpg" alt="a chair" width="100"></img>
           </button>
-          <button onClick={()=>setProfile("dontSit.png")} style={{ border: 'none', background: 'none', padding: 0, cursor: 'pointer' }}>
+          <button onClick={()=>setProfpic("dontSit.png")} style={{ border: 'none', background: 'none', padding: 0, cursor: 'pointer' }}>
             <img className="chairchoice" src="dontSit.png" alt="a chair" width="100"></img>
           </button>
-          <button onClick={()=>setProfile('DefaultChair.png')} style={{ border: 'none', background: 'none', padding: 0, cursor: 'pointer' }}>
+          <button onClick={()=>setProfpic('DefaultChair.png')} style={{ border: 'none', background: 'none', padding: 0, cursor: 'pointer' }}>
             <img className="chairchoice" src='DefaultChair.png' alt="a chair" width="100"></img>
           </button>
       </div>

@@ -16,18 +16,26 @@ export function Home() {
   const [match_array, setMatchArray] = React.useState([])
   const [match, setMatch] = React.useState('')
   
-  function newMatch() {
+  async function newMatch() {
     setNewMatchImg(chairs[Math.floor(Math.random() * chairs.length)]);
   }
 
   function Yeah() {
+    const response = fetch('/api/yeahs/add', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ id: newMatchImg }),
+    });
+    if (!response.ok) {
+      console.log('Error: ' + response.status);
+    }else {
     setMatchArray((prev) => {
       const updatedArray = [...prev, newMatchImg];
       localStorage.setItem('match_array', JSON.stringify(updatedArray));
       return updatedArray;
     });
     newMatch();
-  }
+  }}
 
   return (
 
