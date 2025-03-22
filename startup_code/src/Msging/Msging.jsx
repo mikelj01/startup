@@ -71,7 +71,17 @@ useEffect(() => {getExcuse();}, []);
   return (
     <main className="container-fluid bg-secondary text-center">
 
-      <p></p>
+{/* <div className="grid grid-cols-3 gap-4 p-4">
+      {match_array.map((image, index) => (
+        <img
+          key={index}
+          src={image}
+          alt={`Image ${index + 1}`}
+          className="cursor-pointer rounded-lg shadow-md hover:shadow-lg transition-transform transform hover:scale-105"
+          onClick={() => handleImageClick(image)}
+        />
+      ))}
+    </div> */}
 
       {/* messages */}
       <div className = "Message_Screen">
@@ -88,8 +98,9 @@ useEffect(() => {getExcuse();}, []);
 
 {/* excuses */}
       <div>
+        <p><b>If You don't Know what to say, try this!</b></p>
         <p>{excuse}</p>
-        <button className="button" onClick={() => getExcuse()}>Affirmations</button>
+        <button className="button" onClick={() => getExcuse()}>Wisdom</button>
       </div>
     </main>
   
