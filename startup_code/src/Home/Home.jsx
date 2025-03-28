@@ -34,7 +34,6 @@ export function Home() {
       localStorage.setItem('match_array', JSON.stringify(updatedArray));
       return updatedArray;
     });
-    window.location.href = '/Msging';
     newMatch();
     
   }}
