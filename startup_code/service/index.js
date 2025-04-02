@@ -153,6 +153,10 @@ apiRouter.get('/profPic/get', (req, res) => {
     res.status(401).send({ msg: 'user does not exist' });
     return;
   }
+  if (!user.profPic) {
+    res.status(404).send({ msg: 'no profile pic' });
+    return;
+  }
   res.send({ pic: user.profPic });
 });
 

@@ -3,9 +3,29 @@ import "./ChooseaChair.css"
 // import profPicPicker from "../profPic.jsx"
 
 export function ChooseaChair() {
-  const[profilePic, setProfile] = React.useState(() => {return localStorage.getItem("profilePic") || 'DefaultChair.png'})
-localStorage.setItem("profilePic", profilePic)
+//   const[profilePic, setProfile] = React.useState(() => {return localStorage.getItem("profilePic") || 'DefaultChair.png'})
+// localStorage.setItem("profilePic", profilePic)
+const [profilePic, setProfilePic] = React.useState('DefaultChair.png')
+async function getpic() {
+  try {
+    const response = await fetch('/api/profPic/get');
 
+    if (!response.ok) {
+      console.log('Error: ' + response.status);
+      setProfilePic('DefaultChair.png'); // Fallback to default image on error
+      return;
+    }
+
+    const data = await response.json(); 
+    setProfilePic(data.pic); 
+  } catch (error) {
+    console.error("Error fetching profile picture:", error);
+  }
+}
+
+  React.useEffect(() => {
+    getpic()
+  }, []);
 
 async function setProfpic(newPic){
   const response = await fetch('/api/profPic/set', {
@@ -16,7 +36,7 @@ async function setProfpic(newPic){
   });
   if (response.ok) {
     const data = await response.json();
-    setProfile(data.pic);
+    setProfilePic(data.pic);
     localStorage.setItem("profilePic", data.pic);
   }
   else {
@@ -29,7 +49,7 @@ async function setProfpic(newPic){
     <main className="container-fluid bg-secondary text-center">
       <div>
         <p>Your Chair</p>
-          <img src={profilePic} alt="Your Chair" width="100" class="Profile_img"></img>
+          <img src={profilePic} alt="Choose a Chair" width="100" class="Profile_img"></img>
         <p>
             <b>Choose a Chair</b>
         </p>

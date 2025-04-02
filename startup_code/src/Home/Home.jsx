@@ -4,10 +4,48 @@ import {Link} from 'react-router-dom'
 
 
 export function Home() {
-  // const[profilePic, setProfile] = React.useState('https://images.pexels.com/photos/963486/pexels-photo-963486.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1')
+
+  const [profilePic, setProfilePic] = React.useState('DefaultChair.png')
+
+
+  async function getpic() {
+    try {
+      const response = await fetch('/api/profPic/get');
   
-  //   React.useEffect(() => {setProfile('placeholder.png')})
-  const profilePic = localStorage.getItem('profilePic')|| 'DefaultChair.png'
+      if (!response.ok) {
+        console.log('Error: ' + response.status);
+        setProfilePic('DefaultChair.png'); // Fallback to default image on error
+        return;
+      }
+  
+      const data = await response.json(); 
+      setProfilePic(data.pic); 
+    } catch (error) {
+      console.error("Error fetching profile picture:", error);
+    }
+  }
+
+
+  // async function getpic(){
+  //   const response = await fetch('/api/profPic/get', {
+  //     method: 'GET',
+  //     headers: { 'Content-Type': 'application/json' },
+  //     body: JSON.stringify({ id: localStorage.getItem('username') }),
+  //   });
+  //   await response.json()
+  //   if (!response.ok) {
+  //     console.log('Error: ' + response.status);
+  //   }else {
+  //     const data = await response.json();
+  //     setProfilePic(data.pic)
+  //   }
+  // }
+
+  React.useEffect(() => {
+    getpic()
+  }, []);
+
+
   const chairs = [
     "75497317-color-chair.jpg", "Yes.jpg", "rEd.png", "kneetouch.jpg", "malelivingspace.jpg", "leftie'sNightmare.jpg", "notAMurderer.jpg", "dontSit.png", "slughorn.avif", 
    "silhouet-zwart-stoel-clipart-16888496171rE.jpg", "wickerchair-graphicsfairy011c.jpg", 'DefaultChair.png', 'images (1).jpg', 'images (2).jpg', 'images (3).jpg', 'images (4).jpg', 'images (5).jpg', 'images (6).jpg', 'images (8).jpg'
@@ -42,7 +80,7 @@ export function Home() {
 
     <main className="container-fluid bg-secondary text-center">
       <div><p className="tableHead"> <span>Your Chair</span></p>
-      <img src={profilePic} alt="Your Chair" width="100" class="Profile_img"></img>
+      <img src={profilePic} alt="Choose a Chair" width="100" class="Profile_img"></img>
         <p>
 
         </p>
