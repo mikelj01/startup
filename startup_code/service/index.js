@@ -3,6 +3,7 @@ const bcrypt = require('bcryptjs');
 const express = require('express');
 const uuid = require('uuid');
 const app = express();
+//const DB = require('./database.js');
 const authCookieName = 'token';
 
 
@@ -142,6 +143,16 @@ apiRouter.post('/profPic/set', (req, res) => {
     return;
   }
   user.profPic = req.body.pic;
+  res.send({ pic: user.profPic });
+});
+
+//get the profile pic
+apiRouter.get('/profPic/get', (req, res) => {
+  const user = users.find((u) => u.token === req.cookies[authCookieName]);
+  if (!user) {
+    res.status(401).send({ msg: 'user does not exist' });
+    return;
+  }
   res.send({ pic: user.profPic });
 });
 

@@ -33,5 +33,24 @@ async function updateUser(user) {
   await userCollection.updateOne({ email: user.email }, { $set: user });
 }
 async function addmessage(message) {
-  return scoreCollection.insertOne(message);
+  return messageCollection.insertOne(message);
 }
+
+function getMessages() {
+  const query = { score: { $gt: 0, $lt: 900 } };
+  const options = {
+    
+  };
+  const cursor = messageCollection.find(query, options);
+  return cursor.toArray();
+}
+
+
+module.exports = {
+  getUser,
+  getUserByToken,
+  addUser,
+  updateUser,
+  addmessage,
+  getMessages,
+};

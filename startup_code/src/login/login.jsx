@@ -1,6 +1,7 @@
 import React from 'react';
 import "./login.css"
 import { useNavigate } from 'react-router-dom';
+import { Home } from '../Home/Home';
 
 export function Login({setUser}) {
 const [username, setUsername] = React.useState("");
@@ -27,7 +28,9 @@ function passinput(event) {
       setUsername(username);
       localStorage.setItem("username", username);
       localStorage.setItem("loggedin", true);
+      setLoggedin(true);
       localStorage.setItem("profilePic", res.pic);
+      navigate('/');
       window.location.reload();
     } else {
       alert('Authentication failed');
@@ -46,10 +49,8 @@ function passinput(event) {
       localStorage.setItem("username", username);
       setLoggedin(true)
       localStorage.setItem("loggedin", true);
+      navigate('/');
       window.location.reload();
-      
-      navigate('../Home/Home.jsx');
-
     } else {
       alert('Authentication failed');
     }
@@ -65,6 +66,7 @@ async function logout() {
     localStorage.removeItem("username");
     setLoggedin(false);
     localStorage.removeItem("loggedin");
+    navigate('/');
     window.location.reload();
   } else {
     alert('Logout failed');
