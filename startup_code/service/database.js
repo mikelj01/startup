@@ -36,14 +36,7 @@ async function addmessage(message) {
   return messageCollection.insertOne(message);
 }
 
-function getMessages() {
-  const query = { score: { $gt: 0, $lt: 900 } };
-  const options = {
-    
-  };
-  const cursor = messageCollection.find(query, options);
-  return cursor.toArray();
-}
+
 
 
 module.exports = {
