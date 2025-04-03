@@ -72,18 +72,19 @@ apiRouter.post('/yeahs/add', async (req, res) => {
     return;
   }
   user.Yeahs.push(req.body.id);
-  await DB.updateUser(user);  //somthing isn't right here, need to check the database
+  await DB.updateUser(user);  
   res.send({ Yeahs: user.Yeahs });
 });
 
 //add to the nays
 apiRouter.post('/nays/add', async (req, res) => {
-  const user = users.find((u) => u.token === req.cookies[authCookieName]);
+  const user = await DB.getUserByToken(req.cookies[authCookieName]);
   if (!user) {
     res.status(401).send({ msg: 'user does not exist' });
     return;
   }
   user.Nays.push(req.body.id);
+  await DB.updateUser(user); 
   res.send({ Nays: user.Nays });
 });
 
@@ -167,10 +168,5 @@ apiRouter.get('/profPic/get', async (req, res) => {
   res.send({ pic: user.profPic });
 });
 
-//clear cookies
-function clearAuthCookie(res, user) {
-  delete user.token;
-  DB.updateUser(user);
-  res.clearCookie('token');
-}
+
 

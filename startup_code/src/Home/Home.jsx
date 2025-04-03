@@ -28,29 +28,6 @@ export function Home() {
     }, []);
 
 
-  async function getpic() {
-    try {
-      const response = await fetch('/api/profPic/get');
-  
-      if (!response.ok) {
-        console.log('Error: ' + response.status);
-        setProfilePic('DefaultChair.png'); // Fallback to default image on error
-        return;
-      }
-  
-      const data = await response.json(); 
-      setProfilePic(data.pic); 
-    } catch (error) {
-      console.error("Error fetching profile picture:", error);
-    }
-  }
-
-
-
-  React.useEffect(() => {
-    getpic()
-  }, []);
-
 
   const chairs = [
     "75497317-color-chair.jpg", "Yes.jpg", "rEd.png", "kneetouch.jpg", "malelivingspace.jpg", "leftie'sNightmare.jpg", "notAMurderer.jpg", "dontSit.png", "slughorn.avif", 
