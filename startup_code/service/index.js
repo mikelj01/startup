@@ -145,12 +145,14 @@ apiRouter.post('/profPic/set', (req, res) => {
     return;
   }
   user.profPic = req.body.pic;
+  DB.updateUser(user);
   res.send({ pic: user.profPic });
 });
 
 //get the profile pic
 apiRouter.get('/profPic/get', (req, res) => {
-  const user = users.find((u) => u.token === req.cookies[authCookieName]);
+  //const user = users.find((u) => u.token === req.cookies[authCookieName]);
+  const user = DB.getUserByToken(req.cookies[authCookieName]);
   if (!user) {
     res.status(401).send({ msg: 'user does not exist' });
     return;
@@ -165,6 +167,7 @@ apiRouter.get('/profPic/get', (req, res) => {
 //clear cookies
 function clearAuthCookie(res, user) {
   delete user.token;
+  DB.updateUser(user);
   res.clearCookie('token');
 }
 
