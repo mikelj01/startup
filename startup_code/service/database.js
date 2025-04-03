@@ -17,11 +17,11 @@ const messageCollection = db.collection('message');
   }
 })();
 
-function getUser(username) {
+async function getUser(username) {
   return userCollection.findOne({ username: username });
 }
 
-function getUserByToken(token) {
+async function getUserByToken(token) {
   return userCollection.findOne({ token: token });
 }
 
@@ -30,7 +30,7 @@ async function addUser(user) {
 }
 
 async function updateUser(user) {
-  await userCollection.updateOne({ email: user.email }, { $set: user });
+  await userCollection.updateOne({ username: user.username }, { $set: user });
 }
 async function addmessage(message) {
   return messageCollection.insertOne(message);

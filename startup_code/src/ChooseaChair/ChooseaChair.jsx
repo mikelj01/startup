@@ -32,7 +32,7 @@ async function setProfpic(newPic){
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     credentials: 'include',
-    body: JSON.stringify({ pic: newPic }),
+    body: JSON.stringify({ pic: newPic, username : localStorage.getItem("username") }),
   });
   if (response.ok) {
     const data = await response.json();

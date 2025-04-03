@@ -28,9 +28,10 @@ app.listen(port, () => {
 
 async function getUser(field, value) {
   if (value) {
-    DB.getUser(value)
+    user = DB.getUser(value)
+    return user;
   }
-  return null;
+  return null
 }
 
 
@@ -42,6 +43,7 @@ async function createUser(username, password) {
     username: username,
     password: passwordHash,
     pic: 'DefaultChair.png',
+    token: uuid.v4(),
     Yeahs: [],
     Nays: [],
   };
@@ -69,7 +71,7 @@ apiRouter.post('/yeahs/add', async (req, res) => {
     res.status(401).send({ msg: 'user does not exist' });
     return;
   }
-  user = user.Yeahs.push(req.body.id);
+  user.Yeahs.push(req.body.id);
   await DB.updateUser(user);  //somthing isn't right here, need to check the database
   res.send({ Yeahs: user.Yeahs });
 });
@@ -138,21 +140,22 @@ function clearAuthCookie(res, user) {
 }
 
 //set the profile pic
-apiRouter.post('/profPic/set', (req, res) => {
-  const user = users.find((u) => u.token === req.cookies[authCookieName]);
+apiRouter.post('/profPic/set', async (req, res) => {
+  const user = await DB.getUser(req.body.username);
   if (!user) {
     res.status(401).send({ msg: 'user does not exist' });
     return;
   }
   user.profPic = req.body.pic;
+  user.pic = req.body.pic;
   DB.updateUser(user);
   res.send({ pic: user.profPic });
 });
 
 //get the profile pic
-apiRouter.get('/profPic/get', (req, res) => {
+apiRouter.get('/profPic/get', async (req, res) => {
   //const user = users.find((u) => u.token === req.cookies[authCookieName]);
-  const user = DB.getUserByToken(req.cookies[authCookieName]);
+  const user = await DB.getUserByToken(req.cookies[authCookieName]);
   if (!user) {
     res.status(401).send({ msg: 'user does not exist' });
     return;

@@ -6,6 +6,26 @@ import {Link} from 'react-router-dom'
 export function Home() {
 
   const [profilePic, setProfilePic] = React.useState('DefaultChair.png')
+  async function getpic() {
+    try {
+      const response = await fetch('/api/profPic/get');
+  
+      if (!response.ok) {
+        console.log('Error: ' + response.status);
+        setProfilePic('DefaultChair.png'); // Fallback to default image on error
+        return;
+      }
+  
+      const data = await response.json(); 
+      setProfilePic(data.pic); 
+    } catch (error) {
+      console.error("Error fetching profile picture:", error);
+    }
+  }
+  
+    React.useEffect(() => {
+      getpic()
+    }, []);
 
 
   async function getpic() {
