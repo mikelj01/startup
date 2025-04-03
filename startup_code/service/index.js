@@ -45,31 +45,32 @@ async function createUser(username, password) {
     Yeahs: [],
     Nays: [],
   };
-
   DB.addUser(user);
-
   return user;
 }
 
 
 apiRouter.post('/messages/add', async (req, res) => {
-  const user = users.find((u) => u.token === req.cookies[authCookieName]);
+  // const user = users.find((u) => u.token === req.cookies[authCookieName]);
+  const user = DB.getUserByToken(req.cookies[authCookieName]);
   if (!user) {
     res.status(401).send({ msg: 'user does not exist' });
     return;
   }
-  messages.push({ from: user.username, message: req.body.message });
+  messages.push({ from: user.username, message: req.body.message });  //here's some messaging stuff that will need to change
   res.send({ messages });
 });
 
 //add to the yeahs
 apiRouter.post('/yeahs/add', async (req, res) => {
-  const user = users.find((u) => u.token === req.cookies[authCookieName]);
+  //const user = users.find((u) => u.token === req.cookies[authCookieName]);
+  const user = await DB.getUserByToken(req.cookies[authCookieName]);
   if (!user) {
     res.status(401).send({ msg: 'user does not exist' });
     return;
   }
-  user.Yeahs.push(req.body.id);
+  user = user.Yeahs.push(req.body.id);
+  await DB.updateUser(user);  //somthing isn't right here, need to check the database
   res.send({ Yeahs: user.Yeahs });
 });
 
@@ -103,7 +104,7 @@ apiRouter.put('/auth/login', async (req, res) => {
   const user = await getUser('username', req.body.username);
   if (user && (await bcrypt.compare(req.body.password, user.password))) {
     setAuthCookie(res, user);
-
+    DB.updateUser(user);
     res.send({ username: user.username, pic: user.pic });
   } else {
     res.status(401).send({ msg: 'Unauthorized' });
@@ -116,9 +117,9 @@ apiRouter.delete('/auth/logout', async (req, res) => {
   if (user) {
     clearAuthCookie(res, user);
   }
-
   res.send({});
 });
+
 // make cookie
 function setAuthCookie(res, user) {
   user.token = uuid.v4();
@@ -132,6 +133,7 @@ function setAuthCookie(res, user) {
 //clear cookie
 function clearAuthCookie(res, user) {
   delete user.token;
+  DB.updateUser(user);
   res.clearCookie('token');
 }
 

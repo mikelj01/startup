@@ -35,7 +35,9 @@ async function updateUser(user) {
 async function addmessage(message) {
   return messageCollection.insertOne(message);
 }
-
+async function getMessages() {
+  return messageCollection.find({}).toArray();
+}
 
 
 

@@ -26,20 +26,6 @@ export function Home() {
   }
 
 
-  // async function getpic(){
-  //   const response = await fetch('/api/profPic/get', {
-  //     method: 'GET',
-  //     headers: { 'Content-Type': 'application/json' },
-  //     body: JSON.stringify({ id: localStorage.getItem('username') }),
-  //   });
-  //   await response.json()
-  //   if (!response.ok) {
-  //     console.log('Error: ' + response.status);
-  //   }else {
-  //     const data = await response.json();
-  //     setProfilePic(data.pic)
-  //   }
-  // }
 
   React.useEffect(() => {
     getpic()
