@@ -28,7 +28,7 @@ app.listen(port, () => {
 
 async function getUser(field, value) {
   if (value) {
-    return users.find((user) => user[field] === value);
+    DB.getUser(value)
   }
   return null;
 }
@@ -46,7 +46,7 @@ async function createUser(username, password) {
     Nays: [],
   };
 
-  users.push(user);
+  DB.addUser(user);
 
   return user;
 }
