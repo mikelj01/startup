@@ -1,14 +1,32 @@
 const cookieParser = require('cookie-parser');
 const bcrypt = require('bcryptjs');
+const {websocketserver} = require('ws');
 const express = require('express');
 const uuid = require('uuid');
 const app = express();
 const DB = require('./database.js');
 const authCookieName = 'token';
 
+//Websocket stuff
+const wss = new websocketserver({ noServer: true });
+
+
+Server.on('upgrade', (request, socket, head) => {
+  wss.handleUpgrade(request, socket, head, function done(ws) {
+    wss.emit('connection', done, request);
+  });
+});
+
+
+
+
+//end websocket stuff
+
+
 
 
 const port = process.argv.length > 2 ? process.argv[2] : 4000;
+
 
 let users = [];
 let messages = [];
