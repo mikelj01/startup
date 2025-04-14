@@ -17,9 +17,45 @@ Server.on('upgrade', (request, socket, head) => {
   });
 });
 
+let connections = [];
 
+wss.on('connection', (ws) => {
+  const connection = { id: connections.length + 1, alive: true, ws };
+  connections.push(connection);
 
+  ws.on('message', function message(data) {
+    connections.forEach((conn) => {
+      if (conn.id !== connection.id) {
+        conn.ws.send(data);
+      }
+    });
+  });
 
+ws.on('close', () => {
+  connections.findIndex((o, i) => {
+    if (o.id === connection.id) {
+      connections.splice(i, 1);
+      return true;
+    }
+  });
+});
+
+ws.on('pong', () => {
+  connection.alive = true;
+});
+});
+
+setInterval(() => {
+  connections.forEach((conn) => {
+    if (conn.alive === false) {
+      conn.ws.terminate();
+      
+    } else {
+    conn.alive = false;
+    conn.ws.ping();
+    }
+  });
+}, 10000);
 //end websocket stuff
 
 
