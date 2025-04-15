@@ -1,68 +1,13 @@
 const cookieParser = require('cookie-parser');
 const bcrypt = require('bcryptjs');
-const {websocketserver} = require('ws');
+const { peerProxy } = require('./peerProxy.js');
 const express = require('express');
 const uuid = require('uuid');
 const app = express();
 const DB = require('./database.js');
 const authCookieName = 'token';
 
-//Websocket stuff
-const wss = new websocketserver({ noServer: true });
-
-
-Server.on('upgrade', (request, socket, head) => {
-  wss.handleUpgrade(request, socket, head, function done(ws) {
-    wss.emit('connection', done, request);
-  });
-});
-
-let connections = [];
-
-wss.on('connection', (ws) => {
-  const connection = { id: connections.length + 1, alive: true, ws };
-  connections.push(connection);
-
-  ws.on('message', function message(data) {
-    connections.forEach((conn) => {
-      if (conn.id !== connection.id) {
-        conn.ws.send(data);
-      }
-    });
-  });
-
-ws.on('close', () => {
-  connections.findIndex((o, i) => {
-    if (o.id === connection.id) {
-      connections.splice(i, 1);
-      return true;
-    }
-  });
-});
-
-ws.on('pong', () => {
-  connection.alive = true;
-});
-});
-
-setInterval(() => {
-  connections.forEach((conn) => {
-    if (conn.alive === false) {
-      conn.ws.terminate();
-      
-    } else {
-    conn.alive = false;
-    conn.ws.ping();
-    }
-  });
-}, 10000);
-//end websocket stuff
-
-
-
-
 const port = process.argv.length > 2 ? process.argv[2] : 4000;
-
 
 let users = [];
 let messages = [];
@@ -76,9 +21,75 @@ app.use(express.static('public'));
 var apiRouter = express.Router();
 app.use(`/api`, apiRouter);
 
-app.listen(port, () => {
+
+const httpService = app.listen(port, () => {
   console.log(`Listening on port ${port}`);
 });
+
+peerProxy(httpService);
+
+
+
+
+//Websocket stuff
+// const wss = new WebSocketServer({ noServer: true });
+
+
+
+// server.on('upgrade', (request, socket, head) => {
+//   wss.handleUpgrade(request, socket, head, function done(ws) {
+//     wss.emit('connection', ws, request);
+//   });
+// });
+
+// let connections = [];
+
+// wss.on('connection', (ws) => {
+//   const connection = { id: connections.length + 1, alive: true, ws };
+//   connections.push(connection);
+
+//   ws.on('message', function message(data) {
+//     connections.forEach((conn) => {
+//       if (conn.id !== connection.id) {
+//         conn.ws.send(data);
+//       }
+//     });
+//   });
+
+//   ws.on('close', () => {
+//     const index = connections.findIndex((o) => o.id === connection.id);
+//     if (index !== -1) {
+//       connections.splice(index, 1);
+//     }
+//   });
+
+// ws.on('pong', () => {
+//   connection.alive = true;
+// });
+// });
+
+// setInterval(() => {
+//   connections.forEach((conn) => {
+//     if (conn.alive === false) {
+//       conn.ws.terminate();
+      
+//     } else {
+//     conn.alive = false;
+//     conn.ws.ping();
+//     }
+//   });
+// }, 10000);
+
+
+
+
+
+
+//end websocket stuff
+
+
+
+
 
 async function getUser(field, value) {
   if (value) {
@@ -87,6 +98,21 @@ async function getUser(field, value) {
   }
   return null
 }
+
+
+
+
+apiRouter.get('/user', async (req, res) => {
+  // const user = users.find((u) => u.token === req.cookies[authCookieName]);
+  const user = DB.getUserByToken(req.cookies[authCookieName]);
+  if (!user) {
+    res.status(401).send({ msg: 'user does not exist' });
+    return;
+  }
+  res.send({ username: user.username, Yeahs: user.Yeahs, Nays: user.Nays });
+}
+);
+
 
 
 // Create a new user

@@ -1,47 +1,80 @@
 // import React, { use } from 'react';
 import React, { useState, useEffect, use } from 'react';
-
+import {Message, MessageEvent} from './frontChat.js';
 import "./Msging.css";
 
 
 
 
 export function Msging() {
+  const [user, setUser] = React.useState(() => {return localStorage.getItem("username") || 'DefaultUser'})
+  async function getUser() {
+    try {
+     const response = await fetch('/api/user/get'); 
+    if (!response.ok) {
+      console.log('Error: ' + response.status);
+      setUser('DefaultUser'); // Fallback to default username on error
+      return;
+    }
+    const data = await response.json();
+    setUser(data.username); 
+    } catch (error) {
+      console.error("Error fetching username:", error);
+    }
+  }
 
-  const [messages, setMessages] = React.useState(() => {
-    return JSON.parse(localStorage.getItem('messages')) || [];
+  const [events, setEvent] = React.useState([]);
+
+  React.useEffect(() => {
+    frontChat.addHandler(handlemessageEvent);
+
+    return () => {
+      frontChat.removeHandler(handlemessageEvent);
+    };
   });
+
+  function handlemessageEvent(event) {
+    setEvent([...events, event]);
+  }
   
-  const [index, setIndex] = React.useState(() => {
-    return parseInt(localStorage.getItem('index')) || 0;
-  });
 
 const [typed_msg, setTypedMsg] = React.useState("");
-const messageArray = ["Hi", "Good, How are you?", "Nice, I like your chair", "Want to go to the park?", "Sure", "I'll be there in 5 minutes", "I'm here", "I'm leaving", "Goodbye"];
 
-
-const match_array = JSON.parse(localStorage.getItem('match_array')) || [];
 
 
 function textInpt(event) {
   setTypedMsg(event.target.value);
 }
 
-function delayResponse() {
-  setTimeout(() => {
-    setMessages((prevMessages) => [...prevMessages, Response()]);
-  }, 1000);
+async function sendMessage() {
+MessageEvent.BroadcastMessage(user, typed_msg);
+}
+ 
+function createMessageArray() {
+  const messageArray = [];
+  for (const [i, event] of events.entries()) {
+    let message = 'unknown';
+    if (event.type === GameEvent.End) {
+      message = `scored ${event.value.score}`;
+    } else if (event.type === GameEvent.Start) {
+      message = `started a new game`;
+    } else if (event.type === GameEvent.System) {
+      message = event.value.msg;
+    }
+
+    messageArray.push(
+      <div key={i} className='event'>
+        <span className={'player-event'}>{event.from.split('@')[0]}</span>
+        {message}
+      </div>
+    );
+  }
+  return messageArray;
 }
 
 
-const sendMessage = () => {
-  if (typed_msg.trim() !== "") 
-  setMessages(messages => [...messages, typed_msg]);
-  setTypedMsg(""); 
-  delayResponse(messages);
-  
-};
- 
+
+
 
 
 async function getExcuse() {
@@ -54,7 +87,6 @@ async function getExcuse() {
       .catch();
   
 }
-
 useEffect(() => {getExcuse();}, []);
 
 
@@ -62,18 +94,12 @@ useEffect(() => {getExcuse();}, []);
   return (
     <main className="container-fluid bg-secondary text-center">
  <p></p>
-{/* <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4">
-      {match_array.map((image, index) => (
-        <img key={index} src={image} alt={`Image ${index + 1}`} className="w-full h-40 md:h-48 lg:h-56 object-cover rounded-lg" onClick={() => handleImageClick(image)}/>
-      ))}
-    </div> */}
+
 
       {/* messages */}
       <div className = "Message_Screen">
         <p><b>Messages:</b></p> 
-        {messages.map((msg, index) => (
-          <div key={index} className="message">{msg}</div>
-        ))}
+        <div id='player-messages'>{createMessageArray()}</div>
       </div>
 
       <div>
@@ -81,11 +107,13 @@ useEffect(() => {getExcuse();}, []);
         <button className="button" onClick= {sendMessage}>Send</button>
       </div>
 
+
+
 {/* excuses */}
       <div>
         <p><b>If You don't Know what to say, try this!</b></p>
         <p>{excuse}</p>
-        <button className="button" onClick={() => getExcuse()}>Wisdom</button>
+        <button className="button" onClick = {getExcuse} >Wisdom</button>
       </div>
     </main>
   

@@ -6,10 +6,10 @@ export function ChooseaChair() {
 //   const[profilePic, setProfile] = React.useState(() => {return localStorage.getItem("profilePic") || 'DefaultChair.png'})
 // localStorage.setItem("profilePic", profilePic)
 const [profilePic, setProfilePic] = React.useState('DefaultChair.png')
+
 async function getpic() {
   try {
     const response = await fetch('/api/profPic/get');
-
     if (!response.ok) {
       console.log('Error: ' + response.status);
       setProfilePic('DefaultChair.png'); // Fallback to default image on error
