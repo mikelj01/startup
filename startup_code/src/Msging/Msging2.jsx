@@ -1,6 +1,6 @@
 // import React, { use } from 'react';
 import React, { useState, useEffect, use } from 'react';
-import {Message, MessageEvent} from './frontChat.js';
+import {Message, messanger} from './frontChat.js';
 import "./Msging.css";
 
 
@@ -8,6 +8,7 @@ import "./Msging.css";
 
 export function Msging() {
   const [user, setUser] = React.useState(() => {return localStorage.getItem("username") || 'DefaultUser'})
+  const [excuse, setExcuse] = React.useState('');
   async function getUser() {
     try {
      const response = await fetch('/api/user/get'); 
@@ -22,14 +23,16 @@ export function Msging() {
       console.error("Error fetching username:", error);
     }
   }
+  useEffect(() => {getUser();}, []);
+
 
   const [events, setEvent] = React.useState([]);
 
   React.useEffect(() => {
-    frontChat.addHandler(handlemessageEvent);
+      messanger.addHandler(handlemessageEvent);
 
     return () => {
-      frontChat.removeHandler(handlemessageEvent);
+      messanger.removeHandler(handlemessageEvent);
     };
   });
 
@@ -44,28 +47,25 @@ const [typed_msg, setTypedMsg] = React.useState("");
 
 function textInpt(event) {
   setTypedMsg(event.target.value);
+  
 }
 
 async function sendMessage() {
-MessageEvent.BroadcastMessage(user, typed_msg);
+messanger.BroadcastMessage(user, typed_msg);
+setTypedMsg("");
+events.push(new Message(user, typed_msg));
 }
  
 function createMessageArray() {
   const messageArray = [];
   for (const [i, event] of events.entries()) {
-    let message = 'unknown';
-    if (event.type === GameEvent.End) {
-      message = `scored ${event.value.score}`;
-    } else if (event.type === GameEvent.Start) {
-      message = `started a new game`;
-    } else if (event.type === GameEvent.System) {
-      message = event.value.msg;
-    }
-
+    const message = event?.value ?? 'unknown';
+    console.log('message: ' + message);
     messageArray.push(
       <div key={i} className='event'>
-        <span className={'player-event'}>{event.from.split('@')[0]}</span>
-        {message}
+        {/* <span className={'player-event'}>{event.from}</span> */}
+        {/* <span className={'player-event'}>anonymous</span> */}
+        <span className='message'>{ message }</span>
       </div>
     );
   }

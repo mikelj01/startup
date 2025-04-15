@@ -11,15 +11,21 @@ class MessageEvent {
   events = [];
   handlers = [];
 
+
   constructor() {
     let port = window.location.port;
     const protocol = window.location.protocol === 'http:' ? 'ws' : 'wss';
+    this.messageQueue = [];
     this.socket = new WebSocket(`${protocol}://${window.location.hostname}:${port}/ws`);
     this.socket.onopen = (event) => {
-      this.receiveEvent(new Message('Simon', { msg: 'connected' }));
+      // this.receiveEvent(new Message('Loveseat ', 'connected'));
+      this.messageQueue.forEach((msg) => {
+        this.socket.send(JSON.stringify(msg));
+      });
+      this.messageQueue = [];
     };
     this.socket.onclose = (event) => {
-      this.receiveEvent(new Message('Simon', { msg: 'disconnected' }));
+      this.receiveEvent(new Message('Loveseat ', 'disconnected'));
     };
     this.socket.onmessage = async (msg) => {
       try {
@@ -30,8 +36,15 @@ class MessageEvent {
   }
 
   BroadcastMessage(from, value) {
+    console.log('broadcast message');
     const event = new Message(from, value);
-    this.socket.send(JSON.stringify(event));
+    if (this.socket.readyState === WebSocket.OPEN) {
+    this.socket.send(JSON.stringify(event));}
+    else {
+      console.log('socket not open');
+      console.log(value);
+      this.messageQueue.push(event);
+    }
   }
 
   addHandler(handler) {
@@ -53,8 +66,8 @@ class MessageEvent {
   }
 }
 
-const messenger = new MessageEvent();
-export { messenger };
+const messanger = new MessageEvent();
+export { Message, messanger };
 
 
 

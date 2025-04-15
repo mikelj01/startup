@@ -31,65 +31,6 @@ peerProxy(httpService);
 
 
 
-//Websocket stuff
-// const wss = new WebSocketServer({ noServer: true });
-
-
-
-// server.on('upgrade', (request, socket, head) => {
-//   wss.handleUpgrade(request, socket, head, function done(ws) {
-//     wss.emit('connection', ws, request);
-//   });
-// });
-
-// let connections = [];
-
-// wss.on('connection', (ws) => {
-//   const connection = { id: connections.length + 1, alive: true, ws };
-//   connections.push(connection);
-
-//   ws.on('message', function message(data) {
-//     connections.forEach((conn) => {
-//       if (conn.id !== connection.id) {
-//         conn.ws.send(data);
-//       }
-//     });
-//   });
-
-//   ws.on('close', () => {
-//     const index = connections.findIndex((o) => o.id === connection.id);
-//     if (index !== -1) {
-//       connections.splice(index, 1);
-//     }
-//   });
-
-// ws.on('pong', () => {
-//   connection.alive = true;
-// });
-// });
-
-// setInterval(() => {
-//   connections.forEach((conn) => {
-//     if (conn.alive === false) {
-//       conn.ws.terminate();
-      
-//     } else {
-//     conn.alive = false;
-//     conn.ws.ping();
-//     }
-//   });
-// }, 10000);
-
-
-
-
-
-
-//end websocket stuff
-
-
-
-
 
 async function getUser(field, value) {
   if (value) {
@@ -102,14 +43,14 @@ async function getUser(field, value) {
 
 
 
-apiRouter.get('/user', async (req, res) => {
+apiRouter.get('/user/get', async (req, res) => {
   // const user = users.find((u) => u.token === req.cookies[authCookieName]);
-  const user = DB.getUserByToken(req.cookies[authCookieName]);
+  const user = await DB.getUser(req.body.username);
   if (!user) {
     res.status(401).send({ msg: 'user does not exist' });
     return;
   }
-  res.send({ username: user.username, Yeahs: user.Yeahs, Nays: user.Nays });
+  res.send({ username: user.email});
 }
 );
 

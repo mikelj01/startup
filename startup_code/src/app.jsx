@@ -4,7 +4,7 @@ import './app.css';
 import { BrowserRouter, NavLink, Route, Routes } from 'react-router-dom';
 import { Login } from './login/login';
 import { ChooseaChair } from './ChooseaChair/ChooseaChair';
-import { Msging } from './Msging/Msging';
+import { Msging } from './Msging/Msging2';
 import { Matching } from './Matching/matching';
 import { Home } from './Home/Home';
 
